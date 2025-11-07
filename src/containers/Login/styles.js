@@ -43,7 +43,7 @@ font-weight: 800;
 a {
    text-decoration: underline; 
 }
-
+}
 
 `;
 export const Title= styled.h2 `
