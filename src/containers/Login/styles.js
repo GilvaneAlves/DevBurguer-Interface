@@ -52,6 +52,7 @@ font-size: 50px;
 color: #ffffff;
 span {
     color: #9758a6;
+    font-family: "Road Rage", sans-serif;
 }
 `;
 export const Form = styled.form `
@@ -82,7 +83,5 @@ label {
 }
 `;
 
-export const Button = styled.button `
 
-`;
 
