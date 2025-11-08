@@ -1,21 +1,28 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-
+import { api } from '../../services/api'
 
 import { Container, Form, InputContainer, LeftContainer, RightContainer, Title } from "./styles";
 import { Button } from "../../components/Button";
 import Logo from "../../assets/logo.png";
+import { toast } from "react-toastify";
 
 
 
 export function Login() {
     const schema = yup
         .object({
-            email: yup.string().email().required(),
-            password: yup.string().min(6).required(),
+            email: yup
+                .string()
+                .email("Please enter a valid email address.")
+                .required("Email is required."),
+            password: yup
+                .string()
+                .min(6, "Password must be at least 6 characters long.")
+                .required("Password is required."),
         })
-        .required()
+        .required();
 
 
     const {
@@ -25,8 +32,24 @@ export function Login() {
     } = useForm({
         resolver: yupResolver(schema),
     })
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = async (data) => {
+        const response = await toast.promise(
+            api.post('/sessions', {
+                email: data.email,
+                password: data.password,
+            }),
+            {
+                pending: 'Verificando os dados!',
+                success: 'Seja Bem-vindo(a) 👌',
+                error: 'Email ou Senha Incorretos! 🤯'
+            }
+        )
 
+
+
+
+        console.log(response);
+    }
     return (
         <Container>
             <LeftContainer>
@@ -41,10 +64,12 @@ export function Login() {
                     <InputContainer>
                         <label>Email</label>
                         <input type="email"{...register("email")} />
+                        <p>{errors?.email?.message}</p>
                     </InputContainer>
                     <InputContainer>
                         <label>Senha</label>
                         <input type="password" {...register("password")} />
+                        <p>{errors?.password?.message}</p>
                     </InputContainer>
                     <Button type="submit">Entrar</Button>
                 </Form>
