@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import BackgroundLogin  from "../../assets/background-login.jpg";
 import Background  from "../../assets/background.png";
+import { Link as ReactLink } from "react-router-dom";
 
 export const Container = styled.div `
 display: flex;
@@ -88,6 +89,11 @@ p {
     font-weight: 600;
     height: 10px;
 }
+`;
+
+export const Link = styled(ReactLink)`
+text-decoration: none;
+color: #fff;
 `;
 
 
