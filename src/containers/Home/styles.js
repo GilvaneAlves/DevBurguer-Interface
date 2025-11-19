@@ -19,14 +19,17 @@ export const Banner = styled.div`
 `;
 
 export const Container = styled.section`
-background: linear-gradient(
-    rgba(255,255,255, 0.5),
-    rgba(255,255,255, 0.5)
-),
- url(${Background});
-height: 500px;
-
-
+  background: linear-gradient(
+      rgba(255,255,255, 0.5),
+      rgba(255,255,255, 0.5)
+  ),
+  url(${Background});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  aspect-ratio: 16/9;           
 `;
+
 
 export const Content = styled.div``;
