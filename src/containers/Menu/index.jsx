@@ -3,80 +3,87 @@ import { Container, Banner, CategoryMenu, ProductsContainer, CategoryButton } fr
 import { api } from "../../services/api";
 import { formatPrice } from "../../utils/formatPrice";
 import { CardProduct } from "../../components/CardProduct";
-import { useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/BackButton";
 
 export function Menu() {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
-    const [filterredProducts, setFilterredProducts] = useState([]);
-    const [activeCategory, setActiveCategory] = useState(0);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     const navigate = useNavigate();
+
+    const { search } = useLocation();
+    const queryParans = new URLSearchParams(search);
+
+    const [activeCategory, setActiveCategory] = useState(() => {
+        return Number(queryParans.get('categoria')) || 0;
+    });
 
     useEffect(() => {
         async function loadCategories() {
             const { data } = await api.get('/categories');
 
             const newCategories = [{ id: 0, name: 'Todas' }, ...data];
-
             setCategories(newCategories);
         }
 
         async function loadProducts() {
             const { data } = await api.get('/products');
 
-            const newProducts = data
-                .map((product) => ({
-                    currencyValue: formatPrice(product.price),
-                    ...product,
-                }));
+            const newProducts = data.map((product) => ({
+                currencyValue: formatPrice(product.price),
+                ...product,
+            }));
 
             setProducts(newProducts);
         }
 
         loadCategories();
         loadProducts();
-
-
     }, []);
 
     useEffect(() => {
         if (activeCategory === 0) {
-            setFilterredProducts(products);
+            setFilteredProducts(products);
         } else {
-            const newFilteredProducts = products.filter((product) => product.category_id === activeCategory,
+            const newFilteredProducts = products.filter(
+                (product) => product.category_id === activeCategory
             );
 
-            setFilterredProducts(newFilteredProducts);
+            setFilteredProducts(newFilteredProducts);
         }
     }, [products, activeCategory]);
 
     return (
         <Container>
             <Banner>
-                <h1>O MELHOR
+                <h1>
+                    O MELHOR
                     <br />
                     HAMBURGER
                     <br />
                     ESTÁ AQUI
                     <span>Esse cardápio está irresistível!</span>
                 </h1>
-
             </Banner>
+
             <CategoryMenu>
+                <BackButton />
+
                 {categories.map((category) => (
                     <CategoryButton
                         key={category.id}
+                        $isActiveCategory={category.id === activeCategory}
                         onClick={() => {
-                            navigate({
-                                pathname: '/cardapio',
-                                search: `?categoria=${category.id}`
-                            }, {
-                                replace: true,
-                            },
-
+                            navigate(
+                                {
+                                    pathname: '/cardapio',
+                                    search: `?categoria=${category.id}`,
+                                },
+                                { replace: true }
                             );
+
                             setActiveCategory(category.id);
                         }}
                     >
@@ -86,13 +93,10 @@ export function Menu() {
             </CategoryMenu>
 
             <ProductsContainer>
-                {filterredProducts.map((product) => (
+                {filteredProducts.map((product) => (
                     <CardProduct product={product} key={product.id} />
                 ))}
             </ProductsContainer>
-
-
-
         </Container>
     );
 }

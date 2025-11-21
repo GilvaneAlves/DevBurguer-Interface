@@ -58,15 +58,20 @@ margin-top: 30px;
 `;
 
 export const CategoryButton = styled(Link)`
+
 text-decoration: none;
 cursor: pointer;
 background: none;
-color: #9758a6;
+color: ${(props) => (props.$isActiveCategory ? '#9758a6' : '#696969')} ;
 font-size: 24px;
 font-weight: 500;
 padding-bottom: 5px;
 line-height: 20px;
-border-bottom: 3px solid #9758a6;
+border: none;
+border-bottom: ${({ $isActiveCategory }) =>
+  $isActiveCategory ? '3px solid #9758a6' : '3px solid transparent'};
+display: inline-block;
+
 
 `;
 
@@ -80,4 +85,7 @@ max-width: 1280px;
 margin: 50px auto;
 
 
+`;
+export const ButtonBack = styled.button`
+    margin-bottom: 20px;
 `;

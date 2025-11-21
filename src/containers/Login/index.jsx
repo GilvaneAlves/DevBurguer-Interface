@@ -8,11 +8,13 @@ import { Container, Form, InputContainer, LeftContainer, RightContainer, Title, 
 import { Button } from "../../components/Button";
 import Logo from "../../assets/logo.png";
 import { toast } from "react-toastify";
-
+import { useUser } from "../../hooks/UserContext";
 
 
 export function Login() {
     const navigate = useNavigate();
+
+    const { putUserData } = useUser();
 
     const schema = yup
         .object({
@@ -37,7 +39,7 @@ export function Login() {
     })
     const onSubmit = async (data) => {
         const {
-            data: { token },
+            data: userData
         } = await toast.promise(
             api.post('/sessions', {
                 email: data.email,
@@ -57,8 +59,8 @@ export function Login() {
             }
         )
 
+        putUserData(userData);
 
-        localStorage.setItem('token', token);
 
 
     }
