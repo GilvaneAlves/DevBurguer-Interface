@@ -1,16 +1,118 @@
-# React + Vite
+# DevBurguer Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Visão Geral
 
-Currently, two official plugins are available:
+**DevBurguer Interface** é a camada cliente de um sistema completo de gestão de hamburgueria digital, desenvolvida com **React e Vite**.  
+Ela provê um painel de administração para gerenciar produtos, categorias e pedidos, consumindo uma API REST backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+## Demonstração da Interface
 
-## React Compiler
+Abaixo estão exemplos visuais da interface do **DevBurguer Interface**, demonstrando a adaptação para diferentes dispositivos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📱 Versão Mobile
+<p align="center">
+  <img src="src/assets/devburgerMockupsmartphone.png" width="900" />
+</p>
 
-## Expanding the ESLint configuration
+### 💻 Versão Desktop
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<p align="center">
+  <img src="src/assets/devburgerMockupDescktop.png" width="700" />
+</p>
+
+
+## Problema e Solução
+
+Em sistemas de restaurante digital, é necessária uma **interface intuitiva** que permita à equipe operacional:
+
+- Visualizar e organizar o catálogo de produtos;
+- Categorizar itens do menu;
+- Acompanhar e gerenciar pedidos realizados pelos clientes.
+
+Esta interface resolve essas necessidades fornecendo uma **SPA responsiva**, integrada a uma API backend.
+
+---
+
+## Tecnologias
+
+O projeto utiliza tecnologias modernas de frontend:
+
+- **React** — construção de interfaces reativas
+- **Vite** — bundler rápido para desenvolvimento
+- **JavaScript (ES6+)**
+- **ESLint** e **Prettier** — padronização e qualidade de código
+
+---
+
+## Funcionalidades Principais
+
+- Listagem de produtos cadastrados;
+- Gestão de categorias;
+- Visualização e atualização de pedidos;
+- Consumo de API REST para operações CRUD;
+
+---
+
+## Como Executar Localmente
+
+### Pré-requisitos
+
+- Node.js (>= 16.x)
+- npm ou yarn
+
+### Passos
+
+```bash
+git clone https://github.com/GilvaneAlves/DevBurguer-Interface.git
+cd DevBurguer-Interface
+npm install
+# ou
+yarn install
+npm run dev
+# ou
+yarn dev
+```
+
+Acesse:
+```
+http://localhost:5173/
+```
+
+---
+
+## Estrutura de Pastas (Resumo)
+
+```text
+DevBurguer-Interface/
+│
+├─ public/
+│  └─ Arquivos estáticos
+│
+├─ src/
+│  ├─ components/        # Componentes React reutilizáveis
+│  ├─ services/          # Serviços de comunicação com a API
+│  ├─ pages/             # Páginas da aplicação
+│  └─ App.jsx            # Componente raiz
+│
+├─ .eslintrc.js           # Configuração do ESLint
+├─ .prettierrc.js         # Configuração do Prettier
+├─ vite.config.js         # Configuração do Vite
+└─ package.json           # Dependências e scripts
+```
+
+---
+
+## Possíveis Melhorias Futuras (Roadmap)
+
+- Testes automatizados (Jest / React Testing Library)
+- Migração para TypeScript
+- Documentação da API (Swagger)
+- Autenticação de usuários
+- Internacionalização (i18n)
+
+---
+
+## Licença
+
+MIT License
